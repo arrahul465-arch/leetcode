@@ -1,6 +1,6 @@
 -- Write your PostgreSQL query statement below
-SELECT 
-  (SELECT MAX(salary) 
-   FROM Employee 
-   WHERE salary < (SELECT MAX(salary) FROM Employee)
-  ) AS SecondHighestSalary;
+select max (salary) as SecondHighestSalary 
+from employee e
+where salary<(
+    select max(salary) from employee e
+);
