@@ -4,13 +4,9 @@ SELECT
     e.salary AS Salary
 FROM Employee e
 JOIN Department d
-    ON e.departmentId = d.id
-JOIN (
-    SELECT
-        departmentId,
-        MAX(salary) AS max_salary
+ON e.departmentId = d.id
+WHERE e.salary = (
+    SELECT MAX(salary)
     FROM Employee
-    GROUP BY departmentId
-) m
-    ON e.departmentId = m.departmentId
-   AND e.salary = m.max_salary;
+    WHERE departmentId = e.departmentId
+);
